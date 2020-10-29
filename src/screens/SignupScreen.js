@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { Context as AuthContext } from "../context/AuthContext";
 import Form from "../components/Form";
-import NavLink from "../components/NavLink"
+import NavLink from "../components/NavLink";
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup } = useContext(AuthContext);
@@ -15,8 +15,10 @@ const SignupScreen = ({ navigation }) => {
         errorMessage={state.errorMessage}
         submitButtonText="Sign Up"
       />
-      <NavLink routeName="Signin"
-      navText="Already have an account? Sign in instead!"/>
+      <NavLink
+        routeName="Signin"
+        navText="Already have an account? Sign in instead!"
+      />
     </View>
   );
 };
@@ -33,7 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 100,
   },
-  
 });
 
 export default SignupScreen;
