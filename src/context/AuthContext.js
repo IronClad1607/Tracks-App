@@ -5,6 +5,11 @@ import { navigate } from "../navigationRef";
 
 const authReducer = (state, action) => {
   switch (action.type) {
+    case "signout":
+      return {
+        token: null,
+        errorMessage: "",
+      };
     case "signin":
       return {
         token: action.payload,
@@ -63,8 +68,12 @@ const signin = (dispatch) => async ({ email, password }) => {
   }
 };
 
-const signout = () => {
-  return () => {};
+const signout = (dispatch) => async () => {
+  await AsyncStorage.removeItem("token");
+  dispatch({
+    type: "signout",
+  });
+  navigate('loginFlow')
 };
 
 const tryLocalSignin = (dispatch) => async () => {
@@ -80,6 +89,6 @@ const tryLocalSignin = (dispatch) => async () => {
 
 export const { Context, Provider } = createDataContext(
   authReducer,
-  { signin, signout, signup, clearErrorMessage,tryLocalSignin },
+  { signin, signout, signup, clearErrorMessage, tryLocalSignin },
   { token: null, errorMessage: "" }
 );
