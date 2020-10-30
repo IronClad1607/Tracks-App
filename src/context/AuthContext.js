@@ -73,7 +73,7 @@ const signout = (dispatch) => async () => {
   dispatch({
     type: "signout",
   });
-  navigate('loginFlow')
+  navigate("loginFlow");
 };
 
 const tryLocalSignin = (dispatch) => async () => {
