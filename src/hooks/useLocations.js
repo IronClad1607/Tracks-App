@@ -4,7 +4,6 @@ import {
   requestPermissionsAsync,
   watchPositionAsync,
 } from "expo-location";
-import { sub } from "react-native-reanimated";
 
 export default (shouldTrack, callback) => {
   const [err, setErr] = useState(null);
@@ -20,7 +19,7 @@ export default (shouldTrack, callback) => {
         },
         callback
       );
-      setSubscriber(sub)
+      setSubscriber(sub);
     } catch (e) {
       setErr(e);
     }
@@ -30,10 +29,10 @@ export default (shouldTrack, callback) => {
     if (shouldTrack) {
       startWatching();
     } else {
-        subscriber.remove();
-        setSubscriber(null)
+      subscriber.remove();
+      setSubscriber(null);
     }
-  }, [shouldTrack]);
+  }, [shouldTrack, callback]);
 
   return [err];
 };
