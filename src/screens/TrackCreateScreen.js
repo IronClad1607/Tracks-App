@@ -1,42 +1,19 @@
 import "../_mockLocation";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Text, Button, Input } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
-import {
-  requestPermissionsAsync,
-  watchPositionAsync,
-  Accuracy,
-} from "expo-location";
 import Map from "../components/Map";
 import { Context as LocationContext } from "../context/LocationContext";
+import useLocation from "../hooks/useLocations";
 
 const TrackCreateScreen = () => {
-  const [err, setErr] = useState(null);
   const { addLocation } = useContext(LocationContext);
 
-  const startWatching = async () => {
-    try {
-      await requestPermissionsAsync();
-      await watchPositionAsync(
-        {
-          accuracy: Accuracy.BestForNavigation,
-          timeInterval: 1000,
-          distanceInterval: 10,
-        },
-        (location) => {
-          addLocation(location)
-        }
-      );
-    } catch (e) {
-      setErr(e);
-    }
-  };
-
-  useEffect(() => {
-    startWatching();
-  }, []);
-
+  const [err] = useLocation((location) => {
+    addLocation(location);
+  });
+  
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <Text h2> Create A Track</Text>
