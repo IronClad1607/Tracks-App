@@ -7,6 +7,7 @@ import Map from "../components/Map";
 import TrackForm from "../components/TrackForm";
 import { Context as LocationContext } from "../context/LocationContext";
 import useLocation from "../hooks/useLocations";
+import { FontAwesome } from "@expo/vector-icons";
 
 const TrackCreateScreen = ({ isFocused }) => {
   const { addLocation, state } = useContext(LocationContext);
@@ -30,5 +31,10 @@ const TrackCreateScreen = ({ isFocused }) => {
 };
 
 const styles = StyleSheet.create({});
+
+TrackCreateScreen.navigationOptions = {
+  title: "Add Track",
+  tabBarIcon: <FontAwesome name="plus" size={20} />,
+};
 
 export default withNavigationFocus(TrackCreateScreen);
