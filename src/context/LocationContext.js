@@ -42,7 +42,7 @@ const addLocation = (dispatch) => (location, recording) => {
   if (recording) {
     dispatch({
       type: "add_location",
-      payload: "location",
+      payload: location,
     });
   }
 };
